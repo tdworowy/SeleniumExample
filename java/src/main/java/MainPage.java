@@ -1,3 +1,4 @@
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -27,7 +28,9 @@ public class MainPage {
     @FindBy(css =table)
     private WebElement productTable;
 
-
+    Logger getLogger() {
+       return webDriverWrapper.getLogger();
+    }
     MainPage() {
         webDriverWrapper = new WebDriverWrapper(MainPage.class.getName());
         PageFactory.initElements(webDriverWrapper.getDriver(), this);

@@ -18,6 +18,9 @@ public void afterEach () {
 
 @Test
 public void ShouldDisplayEmptySearch() {
+    String testName = Thread.currentThread().getStackTrace()[2].getMethodName();
+    mainPage.getLogger().info("Start Test: ".concat(testName));
+
     mainPage.ClickEnterStoreLink();
     mainPage.ClickSearchButton();
     assert !mainPage.checkIfProductTableIsDisplay();
@@ -26,6 +29,9 @@ public void ShouldDisplayEmptySearch() {
 public void ShouldFindFish() {
         String productName = "Angelfish";
         String linkText = "FI-SW-01";
+
+        String testName = Thread.currentThread().getStackTrace()[2].getMethodName();
+        mainPage.getLogger().info("Start Test: ".concat(testName));
 
         mainPage.ClickEnterStoreLink();
         mainPage.enterSearchText(productName);
