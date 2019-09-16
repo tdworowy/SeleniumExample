@@ -1,28 +1,30 @@
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.config.PropertySetter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import javax.lang.model.element.Name;
+
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-import com.sun.xml.*;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import java.util.Properties;
 
 public class WebDriverWrapper {
     private Logger Log;
     private WebDriver driver;
     private Wait<WebDriver> wait;
+    private String ChromeDriverPath = "chromedriver/chromedriver.exe";
 
     public WebDriverWrapper(String className) {
+        System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
         this.driver = new ChromeDriver();
         this.Log = Logger.getLogger(className);
+        PropertyConfigurator.configure("log4j.properties");
+        //new PropertySetter(Log).setProperties(new Properties("log4j.appender.FILE.File") ,className+".log");
 
         this.wait = new FluentWait <WebDriver>(this.driver)
-                .withTimeout(Duration.ofSeconds(30))
+                .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
 
@@ -35,22 +37,22 @@ public class WebDriverWrapper {
         driver.get(url);
         Log.info("Open url: ".concat(url));
     }
-    public void QuitDriver() {
+    public void quitDriver() {
         driver.quit();
         Log.info("Close browser");
     }
-
-    public void waitForElementById(String elementId) {
-        Log.info("Wait for: ".concat(elementId));
-        wait.until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                return driver.findElement(By.id(elementId));
-            }
-        });
+    public Logger getLogger(){
+        return Log;
+    }
+    public void waitUntilElementIsVisible(WebElement element){
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-   public WebElement findElementByName(String elementName) {
+    public WebElement findElementByName(String elementName) {
         return driver.findElement(By.name(elementName));
+    }
+    public WebElement findElementByLinkText(String text) {
+        return driver.findElement(By.linkText(text));
     }
     public WebElement findElementById(String elementId) {
         return driver.findElement(By.id(elementId));
@@ -58,9 +60,16 @@ public class WebDriverWrapper {
     public WebElement findElementByCss(String css) {
         return driver.findElement(By.cssSelector(css));
     }
-    public void ClickOnElement(WebElement webElement){
+    public void clickOnElement(WebElement webElement){
         Log.info("Click on: ".concat(webElement.toString()));
+        waitUntilElementIsVisible(webElement);
         webElement.click();
+    }
+    public void enterText(WebElement webElement, String text){
+        Log.info("Enter text: ".concat(text));
+        waitUntilElementIsVisible(webElement);
+        webElement.click();
+        webElement.sendKeys(text);
     }
 
 }
