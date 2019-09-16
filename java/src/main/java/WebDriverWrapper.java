@@ -9,38 +9,40 @@ import javax.lang.model.element.Name;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import com.sun.xml.*;
-
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class WebDriverWrapper {
-    private static Logger Log = Logger.getLogger(WebDriverWrapper.class.getName());
+    private Logger Log;
     private WebDriver driver;
     private Wait<WebDriver> wait;
 
-    public WebDriverWrapper() {
+    public WebDriverWrapper(String className) {
         this.driver = new ChromeDriver();
-        wait = new FluentWait <WebDriver>(this.driver)
+        this.Log = Logger.getLogger(className);
+
+        this.wait = new FluentWait <WebDriver>(this.driver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
+
         Log.info("Create WebDriver");
     }
     public WebDriver getDriver() {
         return driver;
     }
     public void OpenPage(String url) {
-        this.driver.get(url);
+        driver.get(url);
         Log.info("Open url: ".concat(url));
     }
     public void QuitDriver() {
-        this.driver.quit();
+        driver.quit();
         Log.info("Close browser");
     }
 
     public void waitForElementById(String elementId) {
         Log.info("Wait for: ".concat(elementId));
-        this.wait.until(new Function<WebDriver, WebElement>() {
+        wait.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver driver) {
                 return driver.findElement(By.id(elementId));
             }
@@ -48,13 +50,13 @@ public class WebDriverWrapper {
     }
 
    public WebElement findElementByName(String elementName) {
-        return this.driver.findElement(By.name(elementName));
+        return driver.findElement(By.name(elementName));
     }
     public WebElement findElementById(String elementId) {
-        return this.driver.findElement(By.id(elementId));
+        return driver.findElement(By.id(elementId));
     }
     public WebElement findElementByCss(String css) {
-        return this.driver.findElement(By.cssSelector(css));
+        return driver.findElement(By.cssSelector(css));
     }
     public void ClickOnElement(WebElement webElement){
         Log.info("Click on: ".concat(webElement.toString()));
