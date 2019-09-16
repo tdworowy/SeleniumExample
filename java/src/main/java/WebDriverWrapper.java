@@ -16,7 +16,7 @@ import java.util.function.Function;
 public class WebDriverWrapper {
     private static Logger Log = Logger.getLogger(WebDriverWrapper.class.getName());
     private WebDriver driver;
-    private Wait wait;
+    private Wait<WebDriver> wait;
 
     public WebDriverWrapper() {
         this.driver = new ChromeDriver();
@@ -39,19 +39,26 @@ public class WebDriverWrapper {
     }
 
     public void waitForElementById(String elementId) {
-         Log.info("Wait for: ".concat(elementId));
-         this.wait.until( new Function<WebDriver, WebElement>() {
-            public WebElement apply (WebDriver driver){
+        Log.info("Wait for: ".concat(elementId));
+        this.wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
                 return driver.findElement(By.id(elementId));
             }
         });
     }
 
-   public void findElementByName(String elementName) {
-        driver.findElement(By.name(elementName));
+   public WebElement findElementByName(String elementName) {
+        return this.driver.findElement(By.name(elementName));
+    }
+    public WebElement findElementById(String elementId) {
+        return this.driver.findElement(By.id(elementId));
+    }
+    public WebElement findElementByCss(String css) {
+        return this.driver.findElement(By.cssSelector(css));
+    }
+    public void ClickOnElement(WebElement webElement){
+        Log.info("Click on: ".concat(webElement.toString()));
+        webElement.click();
     }
 
-    public void findElementById(String elementId) {
-        driver.findElement(By.id(elementId));
-    }
 }
