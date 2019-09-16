@@ -1,6 +1,4 @@
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class MainPageTests {
 
@@ -17,21 +15,20 @@ public void afterEach () {
 
 
 @Test
-public void ShouldDisplayEmptySearch() {
-    String testName = Thread.currentThread().getStackTrace()[2].getMethodName();
-    mainPage.getLogger().info("Start Test: ".concat(testName));
+@DisplayName("ShouldDisplayEmptySearch")
+public void ShouldDisplayEmptySearch(TestInfo testInfo) {
+    mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
 
     mainPage.ClickEnterStoreLink();
     mainPage.ClickSearchButton();
     assert !mainPage.checkIfProductTableIsDisplay();
 }
 @Test
-public void ShouldFindFish() {
+@DisplayName("ShouldFindFish")
+public void ShouldFindFish(TestInfo testInfo) {
         String productName = "Angelfish";
         String linkText = "FI-SW-01";
-
-        String testName = Thread.currentThread().getStackTrace()[2].getMethodName();
-        mainPage.getLogger().info("Start Test: ".concat(testName));
+        mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
 
         mainPage.ClickEnterStoreLink();
         mainPage.enterSearchText(productName);
