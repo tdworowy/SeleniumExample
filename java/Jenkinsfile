@@ -1,0 +1,28 @@
+pipeline {
+    agent { label 'master'}
+    stages {
+      stage("Clean workspcae"){
+                steps {
+                    cleanWs()
+                }
+            }
+     stage("Pull changes from git"){
+               steps{
+                    git 'https://github.com/tdworowy/SeleniumExample.git'
+                }
+            }
+      stage('Run Tests')
+        {
+         steps{
+                dir('java') {
+                    bat 'mvn clean test'
+                }
+            }
+      post {
+        always {
+          junit "java\\target\\surefire-reports\\*.xml"
+          archive  "java\\target\\surefire-reports\\*"
+        }
+      }
+ }
+}
