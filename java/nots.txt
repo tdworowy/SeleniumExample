@@ -5,5 +5,4 @@ jenkins:http://192.168.0.106:8080
 
 mvn clean test
 
-
-java -Dwebdriver.gecko.driver="chromedriver/chromedriver.exe" -jar selenium-server-standalone-3.141.59.jar -role webdriver -hub http://192.168.0.104:4444/grid/register/ -port 5566
+java -Dwebdriver.chrome.driver="chromedriver\chromedriver.exe" -jar selenium-server-standalone-3.141.59.jar -role webdriver -hub http://192.168.0.104:4444/grid/register -port 5566
