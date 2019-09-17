@@ -21,11 +21,11 @@ public class WebDriverWrapper {
         System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
 
        if (remote) {
-             this.driver = DriverFactory.getDriver("remote");
+             this.driver = DriverFactory.getDriver(DriversEnum.Chrome_Remote);
         }
         else
         {
-            this.driver =DriverFactory.getDriver("chrome");
+            this.driver =DriverFactory.getDriver(DriversEnum.Chrome);
         }
         this.Log = Logger.getLogger(className);
         PropertyConfigurator.configure("log4j.properties");

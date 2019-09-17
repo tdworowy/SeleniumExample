@@ -8,14 +8,14 @@ import java.net.URL;
 
 public class DriverFactory {
     private String url = "http://192.168.0.104:4444/wd/hub";
-    public static WebDriver getDriver(String driver) throws MalformedURLException {
+    public static WebDriver getDriver(DriversEnum driver) throws MalformedURLException {
 
-        if (driver.equals("remote")) {
+        if (driver.equals(DriversEnum.Chrome_Remote)) {
             DesiredCapabilities capability = new DesiredCapabilities();
             capability.setBrowserName("chrome");
             return new RemoteWebDriver(new URL("http://192.168.0.104:4444/wd/hub"),capability);
         }
-        if (driver.equals("chrome"))
+        if (driver.equals(DriversEnum.Chrome))
         {
             return new ChromeDriver();
         }
