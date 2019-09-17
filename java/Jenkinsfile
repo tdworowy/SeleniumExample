@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'master'}
     stages {
-      stage("Clean workspcae"){
+      stage("Clean workspace"){
                 steps {
                     cleanWs()
                 }
