@@ -30,7 +30,7 @@ public void ShouldDisplayEmptySearch(TestInfo testInfo) {
 @DisplayName("ShouldFindCat")
 public void ShouldFindCat(TestInfo testInfo) {
         String productName = "Persian";
-        String linkText = "FL-DLH-02 ";
+        String linkText = "FL-DLH-02";
         mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
 
         mainPage.ClickEnterStoreLink();

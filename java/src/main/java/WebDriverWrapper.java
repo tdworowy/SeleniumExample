@@ -3,7 +3,6 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.config.PropertySetter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,7 +24,8 @@ public class WebDriverWrapper {
         System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
 
        if (remote) {
-                DesiredCapabilities capability = new DesiredCapabilities("Chrome","77.0.3865.75", Platform.WIN10);
+                DesiredCapabilities capability = new DesiredCapabilities();
+                capability.setBrowserName("chrome");
                 this.driver = new RemoteWebDriver(new URL("http://192.168.0.104:4444/wd/hub"),capability);
         }
         else
@@ -34,7 +34,6 @@ public class WebDriverWrapper {
         }
         this.Log = Logger.getLogger(className);
         PropertyConfigurator.configure("log4j.properties");
-        //new PropertySetter(Log).setProperties(new Properties("log4j.appender.FILE.File") ,className+".log");
 
         this.wait = new FluentWait <WebDriver>(this.driver)
                 .withTimeout(Duration.ofSeconds(10))
