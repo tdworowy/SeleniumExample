@@ -19,11 +19,11 @@ pipeline {
                     }
                 }
           }
+         }
       post {
         always {
           junit "java\\target\\surefire-reports\\*.xml"
           archive  "java\\target\\surefire-reports\\*"
         }
       }
- }
 }
