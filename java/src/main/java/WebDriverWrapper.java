@@ -1,18 +1,15 @@
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.log4j.config.PropertySetter;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
-import java.util.Properties;
 
 public class WebDriverWrapper {
     private Logger Log;
@@ -24,23 +21,24 @@ public class WebDriverWrapper {
         System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
 
        if (remote) {
-                DesiredCapabilities capability = new DesiredCapabilities();
-                capability.setBrowserName("chrome");
-                this.driver = new RemoteWebDriver(new URL("http://192.168.0.104:4444/wd/hub"),capability);
+             this.driver = DriverFactory.getDriver("remote");
         }
         else
         {
-            this.driver = new ChromeDriver();
+            this.driver =DriverFactory.getDriver("chrome");
         }
         this.Log = Logger.getLogger(className);
         PropertyConfigurator.configure("log4j.properties");
 
-        this.wait = new FluentWait <WebDriver>(this.driver)
+        this.wait = getFluentWait();
+
+        Log.info("Create WebDriver");
+    }
+    private Wait<WebDriver> getFluentWait(){
+      return new FluentWait <WebDriver>(this.driver)
                 .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
-
-        Log.info("Create WebDriver");
     }
     public WebDriver getDriver() {
         return driver;
