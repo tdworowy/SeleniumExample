@@ -2,3 +2,5 @@ https://www.techbeamers.com/websites-to-practice-selenium-webdriver-online/#1htt
 
 https://maven.apache.org/plugins/maven-javadoc-plugin/usage.html
 jenkins:http://192.168.0.106:8080
+
+mvn clean test

@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class MainPageTests {
 
 private MainPage mainPage;
@@ -21,7 +24,7 @@ public void ShouldDisplayEmptySearch(TestInfo testInfo) {
 
     mainPage.ClickEnterStoreLink();
     mainPage.ClickSearchButton();
-    assert !mainPage.checkIfProductTableIsDisplay();
+    assertFalse(mainPage.checkIfProductTableIsDisplay());
 }
 @Test
 @DisplayName("ShouldFindFish")
@@ -33,7 +36,7 @@ public void ShouldFindFish(TestInfo testInfo) {
         mainPage.ClickEnterStoreLink();
         mainPage.enterSearchText(productName);
         mainPage.ClickSearchButton();
-        assert  mainPage.waitForProductLink(linkText);
-        assert mainPage.checkIfProductTableIsDisplay();
+        assertTrue(mainPage.waitForProductLink(linkText));
+        assertTrue(mainPage.checkIfProductTableIsDisplay());
     }
 }
