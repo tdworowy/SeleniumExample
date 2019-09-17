@@ -13,11 +13,12 @@ pipeline {
             }
       stage('Run Tests')
         {
-         steps{
-                dir('java') {
-                    bat 'mvn clean test'
+             steps{
+                    dir('java') {
+                        bat 'mvn clean test'
+                    }
                 }
-            }
+          }
       post {
         always {
           junit "java\\target\\surefire-reports\\*.xml"
