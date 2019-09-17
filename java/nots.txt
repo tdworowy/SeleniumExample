@@ -4,3 +4,6 @@ https://maven.apache.org/plugins/maven-javadoc-plugin/usage.html
 jenkins:http://192.168.0.106:8080
 
 mvn clean test
+
+
+java -Dwebdriver.gecko.driver="chromedriver/chromedriver.exe" -jar selenium-server-standalone-3.4.0.jar -role webdriver -hub http://192.168.0.104:4444/grid/register -port 5566

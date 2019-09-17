@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class MainPage {
@@ -32,7 +33,11 @@ public class MainPage {
        return webDriverWrapper.getLogger();
     }
     MainPage() {
-        webDriverWrapper = new WebDriverWrapper(MainPage.class.getName());
+        try {
+            webDriverWrapper = new WebDriverWrapper(MainPage.class.getName(),true);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         PageFactory.initElements(webDriverWrapper.getDriver(), this);
         webDriverWrapper.OpenPage(url);
     }
