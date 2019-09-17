@@ -1,6 +1,5 @@
 import os
-
-from Blog_Tests.screens.screen_path import get_screen_path
+from screens.screen_path import get_screen_path
 
 
 def generate_report():

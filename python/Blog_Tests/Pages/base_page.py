@@ -1,8 +1,8 @@
-from Blog_Tests.Pages.admin_page import AdminPage
-from Blog_Tests.Pages.blog_page import BlogPage
-from Blog_Tests.Pages.login_page import LoginPage
-from Chrome_Driver_Folder.driver_path import get_driver_path
+from Pages.admin_page import AdminPage
+from Pages.blog_page import BlogPage
+from Pages.login_page import LoginPage
 from selenium import webdriver
+from Chrome_Driver_Folder.driver_path import get_driver_path
 
 
 def set_up(context, server):
