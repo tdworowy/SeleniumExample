@@ -20,16 +20,14 @@ public class WebDriverWrapper {
     private FileAppender fileAppender;
     private WebDriver driver;
     private Wait<WebDriver> wait;
-    private String ChromeDriverPath = "chromedriver/chromedriver.exe";
     private String className;
     private String testName;
 
     public WebDriverWrapper(String className, boolean remote) throws MalformedURLException {
-        System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
         this.className = className;
 
        if (remote) { this.driver = DriverFactory.getDriver(DriversEnum.ChromeRemote); }
-        else { this.driver =DriverFactory.getDriver(DriversEnum.Chrome);  }
+       else { this.driver =DriverFactory.getDriver(DriversEnum.Chrome);  }
         this.wait = getFluentWait();
         this.Log = createLogger(className);
         Log.info("Create WebDriver");
