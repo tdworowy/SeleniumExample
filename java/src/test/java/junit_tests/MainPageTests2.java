@@ -1,10 +1,14 @@
+package junit_tests;
+
 import WebDriverPackage.MainPage;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainPageTests {
+public class MainPageTests2 {
 
 private MainPage mainPage;
 
@@ -28,16 +32,18 @@ public void ShouldDisplayEmptySearch(TestInfo testInfo) {
     mainPage.ClickSearchButton();
     assertFalse(mainPage.checkIfProductTableIsDisplay());
 }
-@Test
-@DisplayName("ShouldFindFish")
-public void ShouldFindFish(TestInfo testInfo) {
-        mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
-        String productName = "Angelfish";
-        String linkText = "FI-SW-01";
-        mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
+
+@ParameterizedTest(name = "Should Find Cat: {0}, ID= {1}")
+@CsvSource({
+        "Persian,FL-DLH-02",
+        "Manx,FL-DSH-01"
+})
+public void ShouldFindCat(String catName,String linkText, TestInfo testInfo) {
+       mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
+       mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
 
         mainPage.ClickEnterStoreLink();
-        mainPage.enterSearchText(productName);
+        mainPage.enterSearchText(catName);
         mainPage.ClickSearchButton();
         assertTrue(mainPage.waitForProductLink(linkText));
         assertTrue(mainPage.checkIfProductTableIsDisplay());
