@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class MainPage {
@@ -53,6 +54,7 @@ public class MainPage {
         webDriverWrapper.enterText(searchFiled, productName);
     }
     public boolean checkIfProductTableIsDisplay() {
+
         try {
             webDriverWrapper.waitUntilElementIsVisible(productTable);
             return true;
@@ -64,12 +66,18 @@ public class MainPage {
     }
     public boolean waitForProductLink(String productName){
         try {
+            webDriverWrapper.takeScreenshot(productName);
             WebElement product = webDriverWrapper.findElementByLinkText(productName);
             webDriverWrapper.waitUntilElementIsVisible(product);
             return true;
         }
         catch (Exception ex) {
             webDriverWrapper.getLogger().error(ex.getMessage());
+            try {
+                webDriverWrapper.takeScreenshot("Exeption");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return false;
         }
     }

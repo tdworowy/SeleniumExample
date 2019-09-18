@@ -23,6 +23,7 @@ public void afterEach () {
 @Test
 @DisplayName("ShouldDisplayEmptySearch")
 public void ShouldDisplayEmptySearch(TestInfo testInfo) {
+    mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
     mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
 
     mainPage.ClickEnterStoreLink();
@@ -36,6 +37,7 @@ public void ShouldDisplayEmptySearch(TestInfo testInfo) {
         "Manx,FL-DSH-01"
 })
 public void ShouldFindCat(String catName,String linkText, TestInfo testInfo) {
+       mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
        mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
 
         mainPage.ClickEnterStoreLink();

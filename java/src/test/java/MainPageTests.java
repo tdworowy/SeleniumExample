@@ -21,6 +21,7 @@ public void afterEach () {
 @Test
 @DisplayName("ShouldDisplayEmptySearch")
 public void ShouldDisplayEmptySearch(TestInfo testInfo) {
+    mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
     mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
 
     mainPage.ClickEnterStoreLink();
@@ -30,6 +31,7 @@ public void ShouldDisplayEmptySearch(TestInfo testInfo) {
 @Test
 @DisplayName("ShouldFindFish")
 public void ShouldFindFish(TestInfo testInfo) {
+        mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
         String productName = "Angelfish";
         String linkText = "FI-SW-01";
         mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));

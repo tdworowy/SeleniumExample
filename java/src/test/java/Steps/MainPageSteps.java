@@ -1,5 +1,6 @@
 package Steps;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -17,8 +18,10 @@ public class MainPageSteps {
         mainPage.ClickSearchButton();
     }
     @Before
-    public void beforeScenario(){
+    public void beforeScenario(Scenario scenario){
         mainPage = new MainPage();
+        mainPage.getWebDriverWrapper().setTestName(scenario.getName());
+        mainPage.getWebDriverWrapper().getLogger().info("Start scenario: ".concat(scenario.getName()));
     }
 
     @After
