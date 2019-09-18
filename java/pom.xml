@@ -62,18 +62,19 @@
             <version>5.4.2</version>
             <scope>test</scope>
      </dependency>
-      <dependency>
-            <groupId>io.cucumber</groupId>
+        <dependency>
+            <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>4.7.1</version>
+            <version>1.2.5</version>
             <scope>test</scope>
-     </dependency>
-     <dependency>
+        </dependency>
+
+        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>1.2.5</version>
             <scope>test</scope>
-      </dependency>
-    </dependencies>
+        </dependency>
+      </dependencies>
 
 </project>

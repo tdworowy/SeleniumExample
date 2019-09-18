@@ -1,3 +1,5 @@
+package WebDriverPackage;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -66,12 +68,14 @@ public class WebDriverWrapper {
         Log.info("Click on: ".concat(webElement.toString()));
         waitUntilElementIsVisible(webElement);
         webElement.click();
+        Log.info("Browser log: ".concat(driver.manage().logs().get("browser").toJson().toString()));
     }
     public void enterText(WebElement webElement, String text){
         Log.info("Enter text: ".concat(text));
         waitUntilElementIsVisible(webElement);
         webElement.click();
         webElement.sendKeys(text);
+        Log.info("Browser log: ".concat(driver.manage().logs().get("browser").toJson().toString()));
     }
 
 }

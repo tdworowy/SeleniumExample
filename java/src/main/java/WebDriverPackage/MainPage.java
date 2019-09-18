@@ -1,3 +1,5 @@
+package WebDriverPackage;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,10 +28,10 @@ public class MainPage {
     @FindBy(css =table)
     private WebElement productTable;
 
-    Logger getLogger() {
+    public Logger getLogger() {
        return webDriverWrapper.getLogger();
     }
-    MainPage() {
+    public MainPage() {
         try {
             webDriverWrapper = new WebDriverWrapper(MainPage.class.getName(),false);
         } catch (MalformedURLException e) {
@@ -38,19 +40,19 @@ public class MainPage {
         PageFactory.initElements(webDriverWrapper.getDriver(), this);
         webDriverWrapper.OpenPage(url);
     }
-    WebDriverWrapper getWebDriverWrapper() {
+    public WebDriverWrapper getWebDriverWrapper() {
         return webDriverWrapper;
     }
-    void ClickEnterStoreLink() {
+    public void ClickEnterStoreLink() {
         webDriverWrapper.clickOnElement(enterStore);
     }
-    void ClickSearchButton() {
+    public void ClickSearchButton() {
         webDriverWrapper.clickOnElement(searchButton);
     }
-    void enterSearchText(String productName){
+    public void enterSearchText(String productName){
         webDriverWrapper.enterText(searchFiled, productName);
     }
-    boolean checkIfProductTableIsDisplay() {
+    public boolean checkIfProductTableIsDisplay() {
         try {
             webDriverWrapper.waitUntilElementIsVisible(productTable);
             return true;
@@ -60,7 +62,7 @@ public class MainPage {
             return false;
         }
     }
-    boolean waitForProductLink(String productName){
+    public boolean waitForProductLink(String productName){
         try {
             WebElement product = webDriverWrapper.findElementByLinkText(productName);
             webDriverWrapper.waitUntilElementIsVisible(product);
