@@ -1,12 +1,9 @@
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import java.net.MalformedURLException;
-import java.util.List;
 
 public class MainPage {
 
@@ -34,7 +31,7 @@ public class MainPage {
     }
     MainPage() {
         try {
-            webDriverWrapper = new WebDriverWrapper(MainPage.class.getName(),true);
+            webDriverWrapper = new WebDriverWrapper(MainPage.class.getName(),false);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

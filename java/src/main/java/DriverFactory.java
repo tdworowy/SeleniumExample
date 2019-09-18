@@ -7,13 +7,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DriverFactory {
-    private String url = "http://192.168.0.104:4444/wd/hub";
+    private static String url = "http://192.168.0.104:4444/wd/hub";
     public static WebDriver getDriver(DriversEnum driver) throws MalformedURLException {
 
-        if (driver.equals(DriversEnum.Chrome_Remote)) {
+        if (driver.equals(DriversEnum.ChromeRemote)) {
             DesiredCapabilities capability = new DesiredCapabilities();
             capability.setBrowserName("chrome");
-            return new RemoteWebDriver(new URL("http://192.168.0.104:4444/wd/hub"),capability);
+            return new RemoteWebDriver(new URL(url),capability);
         }
         if (driver.equals(DriversEnum.Chrome))
         {
@@ -22,7 +22,7 @@ public class DriverFactory {
         return new ChromeDriver();
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public static void setUrl(String url) {
+        url = url;
     }
 }

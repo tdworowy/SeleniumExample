@@ -1,5 +1,4 @@
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -20,18 +19,10 @@ public class WebDriverWrapper {
     public WebDriverWrapper(String className, boolean remote) throws MalformedURLException {
         System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
 
-       if (remote) {
-             this.driver = DriverFactory.getDriver(DriversEnum.Chrome_Remote);
-        }
-        else
-        {
-            this.driver =DriverFactory.getDriver(DriversEnum.Chrome);
-        }
+       if (remote) { this.driver = DriverFactory.getDriver(DriversEnum.ChromeRemote); }
+        else { this.driver =DriverFactory.getDriver(DriversEnum.Chrome);  }
         this.Log = Logger.getLogger(className);
-        PropertyConfigurator.configure("log4j.properties");
-
         this.wait = getFluentWait();
-
         Log.info("Create WebDriver");
     }
     private Wait<WebDriver> getFluentWait(){
@@ -62,6 +53,7 @@ public class WebDriverWrapper {
         return driver.findElement(By.name(elementName));
     }
     public WebElement findElementByLinkText(String text) {
+        Log.info("Find element by text: ".concat(text));
         return driver.findElement(By.linkText(text));
     }
     public WebElement findElementById(String elementId) {
