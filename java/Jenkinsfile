@@ -24,6 +24,8 @@ pipeline {
         always {
           junit "java\\target\\surefire-reports\\*.xml"
           archive  "java\\target\\surefire-reports\\*"
+          archive  "java\\target\\cucumber-reports\\*"
+          archive  "java\\TestLogs\\*\*"
         }
       }
 }

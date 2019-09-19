@@ -2,13 +2,11 @@ package Pages;
 
 import Utils.TestLogger;
 import WebDriverPackage.WebDriverWrapper;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 public class MainPage {
 
@@ -90,7 +88,7 @@ public class MainPage {
             try {
                 webDriverWrapper.takeScreenshot("Exeption");
             } catch (IOException e) {
-                e.printStackTrace();
+                testLogger.getLog().error(e.getMessage());
             }
             return false;
         }
@@ -103,6 +101,5 @@ public class MainPage {
         webDriverWrapper.clickOnElement(fishLink);
         return new FishPage(webDriverWrapper,testLogger);
     }
-
 
 }

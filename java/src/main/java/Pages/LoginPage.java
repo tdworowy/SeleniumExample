@@ -40,7 +40,7 @@ public class LoginPage {
         try {
             webDriverWrapper.takeScreenshot("LogIn");
         } catch (IOException e) {
-            e.printStackTrace();
+            testLogger.getLog().error(e.getMessage());
         }
         return new MainPage(webDriverWrapper,testLogger);
     }

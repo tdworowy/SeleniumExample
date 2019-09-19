@@ -27,8 +27,5 @@ public class CartPage {
             testLogger.getLog().error(ex.getMessage());
             return false;
         }
-
-
-
     }
 }
