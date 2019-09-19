@@ -1,10 +1,13 @@
 package junit_tests;
 
+import Pages.MainPage;
 import Utils.TestLogger;
-import WebDriverPackage.MainPage;
+import WebDriverPackage.WebDriverWrapper;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.net.MalformedURLException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +18,13 @@ private MainPage mainPage;
 
 public MainPage openMainPge(TestInfo testInfo) {
         TestLogger testLogger = new TestLogger(testInfo.getDisplayName());
-        return new MainPage(testLogger).openMainPage();
+    WebDriverWrapper webDriverWrapper= null;
+    try {
+        webDriverWrapper = new WebDriverWrapper(testLogger,false);
+    } catch (MalformedURLException e) {
+        e.printStackTrace();
+    }
+    return new MainPage(webDriverWrapper,testLogger).openMainPage();
  }
 @AfterEach
 public void afterEach () {

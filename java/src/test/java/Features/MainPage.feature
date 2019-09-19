@@ -1,5 +1,5 @@
 Feature: Main Page Search
-    Scenario Outline: Search for cat
+    Scenario Outline: Search for cat '<name>'
         Given Main page is opened
         And Entry store link is clicked
         When Search for cat '<name>'
@@ -10,7 +10,7 @@ Feature: Main Page Search
             | Persian       | FL-DLH-02     |
             | Manx          | FL-DSH-01     |
 
-     Scenario Outline: Search for dog
+     Scenario Outline: Search for dog '<name>'
              Given Main page is opened
              And Entry store link is clicked
              When Search for dog '<name>'

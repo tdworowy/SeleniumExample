@@ -1,7 +1,8 @@
-package WebDriverPackage;
+package Pages;
 
 import Utils.TestLogger;
-import org.apache.log4j.Logger;
+import WebDriverPackage.WebDriverWrapper;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,6 +20,14 @@ public class MainPage {
     @FindBy(linkText = enterStoreLink)
     private WebElement enterStore;
 
+    private static final String fishLinkCss = "img[src=\"../images/sm_fish.gif\"";
+    @FindBy(css = fishLinkCss)
+    private WebElement fishLink;
+
+    private static final String singInLink = "Sign In";
+    @FindBy(linkText = singInLink)
+    private WebElement singIn;
+
     private static final String searchButtonName = "searchProducts";
     @FindBy(name = searchButtonName)
     private WebElement searchButton;
@@ -34,29 +43,29 @@ public class MainPage {
     public TestLogger getLogger() {
        return testLogger;
     }
-    public MainPage(TestLogger testLogger) {
-        try {
-            webDriverWrapper = new WebDriverWrapper(testLogger,false);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+    public MainPage(WebDriverWrapper webDriverWrapper, TestLogger testLogger) {
+        this.webDriverWrapper = webDriverWrapper;
+        PageFactory.initElements(webDriverWrapper.getDriver(), this);
+        this.testLogger = testLogger;
     }
     public MainPage openMainPage() {
-        PageFactory.initElements(webDriverWrapper.getDriver(), this);
         webDriverWrapper.OpenPage(url);
         return this;
     }
     public WebDriverWrapper getWebDriverWrapper() {
         return webDriverWrapper;
     }
-    public void ClickEnterStoreLink() {
+    public MainPage ClickEnterStoreLink() {
         webDriverWrapper.clickOnElement(enterStore);
+        return  this;
     }
-    public void ClickSearchButton() {
+    public MainPage ClickSearchButton() {
         webDriverWrapper.clickOnElement(searchButton);
+        return this;
     }
-    public void enterSearchText(String productName){
+    public MainPage enterSearchText(String productName){
         webDriverWrapper.enterText(searchFiled, productName);
+        return this;
     }
     public boolean checkIfProductTableIsDisplay() {
 
@@ -86,4 +95,14 @@ public class MainPage {
             return false;
         }
     }
+    public LoginPage openLoginPage(){
+        webDriverWrapper.clickOnElement(singIn);
+        return new LoginPage(webDriverWrapper,testLogger);
+    }
+    public FishPage openFishPage(){
+        webDriverWrapper.clickOnElement(fishLink);
+        return new FishPage(webDriverWrapper,testLogger);
+    }
+
+
 }

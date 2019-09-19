@@ -76,6 +76,7 @@ public class WebDriverWrapper {
         Logger.getLog().info("Enter text: ".concat(text));
         waitUntilElementIsVisible(webElement);
         webElement.click();
+        webElement.clear();
         webElement.sendKeys(text);
         Logger.getLog().info("Browser log: ".concat(driver.manage().logs().get("browser").toJson().toString()));
     }

@@ -1,7 +1,10 @@
 package Steps;
 
+import Pages.CartPage;
+import Pages.FishPage;
+import Pages.MainPage;
 import Utils.TestLogger;
-import WebDriverPackage.MainPage;
+import WebDriverPackage.WebDriverWrapper;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -10,9 +13,14 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
-public class MainPageSteps {
+import java.net.MalformedURLException;
+
+public class ShopSteps {
 
     private MainPage mainPage;
+    private FishPage fishPage;
+    private CartPage cartPage;
+
     TestLogger testLogger;
     private  void  searchForAnimal(String animalName) {
         mainPage.enterSearchText(animalName);
@@ -21,7 +29,13 @@ public class MainPageSteps {
     @Before
     public void beforeScenario(Scenario scenario){
         testLogger = new TestLogger(scenario.getName());
-        mainPage = new MainPage(testLogger);
+        WebDriverWrapper webDriverWrapper = null;
+        try {
+            webDriverWrapper = new WebDriverWrapper(testLogger,false);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        mainPage = new MainPage(webDriverWrapper, testLogger);
         testLogger.getLog().info("Start scenario: ".concat(scenario.getName()));
     }
 
@@ -34,7 +48,14 @@ public class MainPageSteps {
     public void OpenMainPage()  throws Throwable {
         mainPage.openMainPage();
     }
-
+    @Given("^user is log in '(.*?)' '(.*?)'$")
+    public void LogIn(String login, String password)  throws Throwable {
+        mainPage.openLoginPage().LogIn(login, password);
+    }
+    @Given("^fish page is opened$")
+    public void OpenFishPage()  throws Throwable {
+        fishPage = mainPage.openFishPage();
+    }
     @Given("^Entry store link is clicked$")
     public void EnterStoreLink()  throws Throwable {
            mainPage.ClickEnterStoreLink();
@@ -43,6 +64,10 @@ public class MainPageSteps {
     @When("^Search for cat '(.*?)'$")
     public void SearchForCat(String catName)  throws Throwable {
         searchForAnimal(catName);
+    }
+    @When("^Add '(.*?)' '(.*?)' to cart$")
+    public void AddFishToCart(String fishId, String itemId)  throws Throwable {
+        cartPage = fishPage.addToCart(fishId,itemId);
     }
 
     @When("^Search for dog '(.*?)'$")
@@ -53,5 +78,9 @@ public class MainPageSteps {
     public void CatLinkTextIsFount(String linkText)  throws Throwable {
         Assertions.assertTrue(mainPage.waitForProductLink(linkText));
         Assertions.assertTrue(mainPage.checkIfProductTableIsDisplay());
+    }
+    @Then("^fish '(.*?)' is in the cart$")
+    public void FishIsInCar(String itemId)  throws Throwable {
+        Assertions.assertTrue(cartPage.checkIfProductIsInCart(itemId));
     }
 }
