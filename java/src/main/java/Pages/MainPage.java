@@ -1,5 +1,6 @@
 package WebDriverPackage;
 
+import Utils.TestLogger;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,7 @@ public class MainPage {
 
     private String url= "http://przyklady.javastart.pl/jpetstore/";
     private WebDriverWrapper webDriverWrapper;
+    private TestLogger testLogger;
 
     private static final String enterStoreLink = "Enter the Store";
     @FindBy(linkText = enterStoreLink)
@@ -29,17 +31,20 @@ public class MainPage {
     @FindBy(css =table)
     private WebElement productTable;
 
-    public Logger getLogger() {
-       return webDriverWrapper.getLogger();
+    public TestLogger getLogger() {
+       return testLogger;
     }
-    public MainPage() {
+    public MainPage(TestLogger testLogger) {
         try {
-            webDriverWrapper = new WebDriverWrapper(MainPage.class.getName(),false);
+            webDriverWrapper = new WebDriverWrapper(testLogger,false);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+    public MainPage openMainPage() {
         PageFactory.initElements(webDriverWrapper.getDriver(), this);
         webDriverWrapper.OpenPage(url);
+        return this;
     }
     public WebDriverWrapper getWebDriverWrapper() {
         return webDriverWrapper;
@@ -60,7 +65,7 @@ public class MainPage {
             return true;
         }
         catch (Exception ex) {
-            webDriverWrapper.getLogger().error(ex.getMessage());
+            testLogger.getLog().error(ex.getMessage());
             return false;
         }
     }
@@ -72,7 +77,7 @@ public class MainPage {
             return true;
         }
         catch (Exception ex) {
-            webDriverWrapper.getLogger().error(ex.getMessage());
+            testLogger.getLog().error(ex.getMessage());
             try {
                 webDriverWrapper.takeScreenshot("Exeption");
             } catch (IOException e) {

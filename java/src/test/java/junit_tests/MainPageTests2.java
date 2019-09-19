@@ -1,5 +1,6 @@
 package junit_tests;
 
+import Utils.TestLogger;
 import WebDriverPackage.MainPage;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,21 +13,20 @@ public class MainPageTests2 {
 
 private MainPage mainPage;
 
-@BeforeEach
-public void beforeEach() {
-    mainPage = new MainPage();
-}
+public MainPage openMainPge(TestInfo testInfo) {
+        TestLogger testLogger = new TestLogger(testInfo.getDisplayName());
+        return new MainPage(testLogger).openMainPage();
+ }
 @AfterEach
 public void afterEach () {
-    mainPage.getWebDriverWrapper().quitDriver();
-}
-
+        mainPage.getWebDriverWrapper().quitDriver();
+    }
 
 @Test
 @DisplayName("ShouldDisplayEmptySearch")
 public void ShouldDisplayEmptySearch(TestInfo testInfo) {
-    mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
-    mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
+    mainPage = openMainPge(testInfo);
+    mainPage.getLogger().getLog().info("Start Test: ".concat(testInfo.getDisplayName()));
 
     mainPage.ClickEnterStoreLink();
     mainPage.ClickSearchButton();
@@ -39,8 +39,8 @@ public void ShouldDisplayEmptySearch(TestInfo testInfo) {
         "Manx,FL-DSH-01"
 })
 public void ShouldFindCat(String catName,String linkText, TestInfo testInfo) {
-       mainPage.getWebDriverWrapper().setTestName(testInfo.getDisplayName());
-       mainPage.getLogger().info("Start Test: ".concat(testInfo.getDisplayName()));
+        mainPage = openMainPge(testInfo);
+        mainPage.getLogger().getLog().info("Start Test: ".concat(testInfo.getDisplayName()));
 
         mainPage.ClickEnterStoreLink();
         mainPage.enterSearchText(catName);

@@ -1,6 +1,7 @@
 Feature: Main Page Search
     Scenario Outline: Search for cat
-        Given Entry store link is clicked
+        Given Main page is opened
+        And Entry store link is clicked
         When Search for cat '<name>'
         Then Cat link Text is found '<link>'
 
@@ -10,7 +11,8 @@ Feature: Main Page Search
             | Manx          | FL-DSH-01     |
 
      Scenario Outline: Search for dog
-             Given Entry store link is clicked
+             Given Main page is opened
+             And Entry store link is clicked
              When Search for dog '<name>'
              Then Cat link Text is found '<link>'
 

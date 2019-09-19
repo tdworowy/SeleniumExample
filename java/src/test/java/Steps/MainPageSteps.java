@@ -1,5 +1,7 @@
 package Steps;
 
+import Utils.TestLogger;
+import WebDriverPackage.MainPage;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -7,21 +9,20 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.TestInfo;
-import WebDriverPackage.MainPage;
 
 public class MainPageSteps {
 
     private MainPage mainPage;
+    TestLogger testLogger;
     private  void  searchForAnimal(String animalName) {
         mainPage.enterSearchText(animalName);
         mainPage.ClickSearchButton();
     }
     @Before
     public void beforeScenario(Scenario scenario){
-        mainPage = new MainPage();
-        mainPage.getWebDriverWrapper().setTestName(scenario.getName());
-        mainPage.getWebDriverWrapper().getLogger().info("Start scenario: ".concat(scenario.getName()));
+        testLogger = new TestLogger(scenario.getName());
+        mainPage = new MainPage(testLogger);
+        testLogger.getLog().info("Start scenario: ".concat(scenario.getName()));
     }
 
     @After
@@ -29,9 +30,14 @@ public class MainPageSteps {
         mainPage.getWebDriverWrapper().quitDriver();
     }
 
+    @Given("^Main page is opened$")
+    public void OpenMainPage()  throws Throwable {
+        mainPage.openMainPage();
+    }
+
     @Given("^Entry store link is clicked$")
-    public void ShouldDisplayEmptySearch()  throws Throwable {
-         mainPage.ClickEnterStoreLink();
+    public void EnterStoreLink()  throws Throwable {
+           mainPage.ClickEnterStoreLink();
     }
 
     @When("^Search for cat '(.*?)'$")

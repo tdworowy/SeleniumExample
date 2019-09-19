@@ -1,10 +1,7 @@
 package WebDriverPackage;
 
+import Utils.TestLogger;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -16,43 +13,24 @@ import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class WebDriverWrapper {
-    private Logger Log;
-    private FileAppender fileAppender;
+
+    private TestLogger Logger;
     private WebDriver driver;
     private Wait<WebDriver> wait;
-    private String className;
-    private String testName;
 
-    public WebDriverWrapper(String className, boolean remote) throws MalformedURLException {
-        this.className = className;
+    public WebDriverWrapper(TestLogger Logger, boolean remote) throws MalformedURLException {
 
        if (remote) { this.driver = DriverFactory.getDriver(DriversEnum.ChromeRemote); }
        else { this.driver =DriverFactory.getDriver(DriversEnum.Chrome);  }
-        this.wait = getFluentWait();
-        this.Log = createLogger(className);
-        Log.info("Create WebDriver");
-    }
-    private Logger createLogger(String className) {
-        Log = Logger.getLogger(className);
-        return Log;
-    }
-    private void addLogAppender(String fileName) {
-        String  appenderName = "FileLogger";
-        Logger.getRootLogger().removeAppender(appenderName);
 
-        fileAppender = new FileAppender();
-        fileAppender.setName(appenderName);
-        fileAppender.setFile(fileName);
-        fileAppender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
-        fileAppender.setThreshold(Level.DEBUG);
-        fileAppender.setAppend(true);
-        fileAppender.activateOptions();
-        Logger.getRootLogger().addAppender(fileAppender);
-
+       this.wait = getFluentWait();
+       this.Logger = Logger;
+       Logger.getLog().info("Create WebDriver");
     }
+
     public void takeScreenshot(String fileName) throws IOException {
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(className +"/"+testName+"/"+(fileName).concat(".png")));
+        FileUtils.copyFile(scrFile, new File(Logger.getTestLogsDir()+"/"+Logger.getTestName()+"/"+(fileName).concat(".png")));
     }
     private Wait<WebDriver> getFluentWait(){
       return new FluentWait <WebDriver>(this.driver)
@@ -65,14 +43,11 @@ public class WebDriverWrapper {
     }
     public void OpenPage(String url) {
         driver.get(url);
-        Log.info("Open url: ".concat(url));
+        Logger.getLog().info("Open url: ".concat(url));
     }
     public void quitDriver() {
         driver.quit();
-        Log.info("Close browser");
-    }
-    public Logger getLogger(){
-        return Log;
+        Logger.getLog().info("Close browser");
     }
     public void waitUntilElementIsVisible(WebElement element){
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -82,7 +57,7 @@ public class WebDriverWrapper {
         return driver.findElement(By.name(elementName));
     }
     public WebElement findElementByLinkText(String text) {
-        Log.info("Find element by text: ".concat(text));
+        Logger.getLog().info("Find element by text: ".concat(text));
         return driver.findElement(By.linkText(text));
     }
     public WebElement findElementById(String elementId) {
@@ -92,21 +67,18 @@ public class WebDriverWrapper {
         return driver.findElement(By.cssSelector(css));
     }
     public void clickOnElement(WebElement webElement){
-        Log.info("Click on: ".concat(webElement.toString()));
+        Logger.getLog().info("Click on: ".concat(webElement.toString()));
         waitUntilElementIsVisible(webElement);
         webElement.click();
-        Log.info("Browser log: ".concat(driver.manage().logs().get("browser").toJson().toString()));
+        Logger.getLog().info("Browser log: ".concat(driver.manage().logs().get("browser").toJson().toString()));
     }
     public void enterText(WebElement webElement, String text){
-        Log.info("Enter text: ".concat(text));
+        Logger.getLog().info("Enter text: ".concat(text));
         waitUntilElementIsVisible(webElement);
         webElement.click();
         webElement.sendKeys(text);
-        Log.info("Browser log: ".concat(driver.manage().logs().get("browser").toJson().toString()));
+        Logger.getLog().info("Browser log: ".concat(driver.manage().logs().get("browser").toJson().toString()));
     }
 
-    public void setTestName(String testName) {
-        this.testName = testName;
-        addLogAppender(className +"/"+testName+"/"+testName+".log");
-    }
+
 }
