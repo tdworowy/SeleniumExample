@@ -23,9 +23,9 @@ pipeline {
       post {
         always {
           junit "java\\target\\surefire-reports\\*.xml"
-          archive  "java\\target\\surefire-reports\\*"
-          archive  "java\\target\\cucumber-reports\\*"
-          archive  "java\\TestLogs\\*\\*"
+          archiveArtifacts   "java\\target\\surefire-reports\\*"
+          archiveArtifacts   "java\\target\\cucumber-reports\\*"
+          archiveArtifacts   "java\\TestLogs\\*\\*"
         }
       }
 }

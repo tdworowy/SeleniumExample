@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainPageTests2 {
+public class MainPage2Tests {
 
 private MainPage mainPage;
 
@@ -42,7 +42,7 @@ public void ShouldDisplayEmptySearch(TestInfo testInfo) {
     assertFalse(mainPage.checkIfProductTableIsDisplay());
 }
 
-@ParameterizedTest(name = "Should Find Cat: {0}, ID= {1}")
+@ParameterizedTest(name = "Should Find Cat {0}_{1}")
 @CsvSource({
         "Persian,FL-DLH-02",
         "Manx,FL-DSH-01"
