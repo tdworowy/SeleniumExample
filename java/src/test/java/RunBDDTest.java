@@ -6,5 +6,5 @@ import org.junit.runner.RunWith;
                  glue={"Steps"},
                  plugin = { "pretty","html:target/cucumber-reports" })
 @RunWith(Cucumber.class)
-public class RunBDDTests {
+public class RunBDDTest {
 }
