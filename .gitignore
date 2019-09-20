@@ -7,3 +7,4 @@ target
 *.log
 TestLogs
 allure-results
+rerun

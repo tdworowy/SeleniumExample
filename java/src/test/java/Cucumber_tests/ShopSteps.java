@@ -5,7 +5,7 @@ import Pages.FishPage;
 import Pages.MainPage;
 import Utils.TestLogger;
 import WebDriverPackage.WebDriverWrapper;
-import cucumber.api.Scenario;
+import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -27,6 +27,7 @@ public class ShopSteps {
     }
     @Before
     public void beforeScenario(Scenario scenario){
+
         testLogger = new TestLogger(scenario.getName());
         WebDriverWrapper webDriverWrapper = null;
         try {
