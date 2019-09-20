@@ -23,7 +23,6 @@ pipeline {
       post {
         always {
           dir('java') {
-              junit "target\\surefire-reports\\testng-junit-results\\*.xml"
               archiveArtifacts "target\\surefire-reports\\*\\*"
               archiveArtifacts "TestLogs\\*\\*"
               archiveArtifacts "allure-results\\*"
