@@ -83,7 +83,7 @@ public class ShopSteps {
         Assert.assertTrue(cartPage.checkIfProductIsInCart(itemId));
     }
     @Then("^Fail$")
-    public void Fail(String itemId)  throws Throwable {
+    public void Fail()  throws Throwable {
         Assert.fail();
     }
 }
