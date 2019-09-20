@@ -22,10 +22,13 @@ pipeline {
          }
       post {
         always {
-          junit "java\\target\\surefire-reports\\*.xml"
-          archiveArtifacts   "java\\target\\surefire-reports\\*"
-          archiveArtifacts   "java\\target\\cucumber-reports\\*"
-          archiveArtifacts   "java\\TestLogs\\*\\*"
+          dir('java') {
+              junit "target\\surefire-reports\\*.xml"
+              archiveArtifacts   "target\\surefire-reports\\*"
+              archiveArtifacts   "target\\cucumber-reports\\*"
+              archiveArtifacts   "TestLogs\\*\\*"
+              allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+          }
         }
       }
 }
