@@ -27,7 +27,7 @@ pipeline {
             //  archiveArtifacts "target\\surefire-reports\\*"
              // archiveArtifacts "target\\cucumber-reports\\*"
               archiveArtifacts "TestLogs\\*\\*"
-              archiveArtifacts "allure-results\\*\\*"
+              archiveArtifacts "allure-results\\*"
               allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
           }
         }
