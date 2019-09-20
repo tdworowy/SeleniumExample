@@ -10,11 +10,11 @@ Feature: Main Page Search
             | Persian       | FL-DLH-02     |
             | Manx          | FL-DSH-01     |
 
-     Scenario Outline: Search for dog '<name>'
-             Given Main page is opened
-             And Entry store link is clicked
-             When Search for dog '<name>'
-             Then Cat link Text is found '<link>'
+    Scenario Outline: Search for dog '<name>'
+        Given Main page is opened
+        And Entry store link is clicked
+        When Search for dog '<name>'
+        Then Cat link Text is found '<link>'
 
         Examples:
             | name          | link         |
