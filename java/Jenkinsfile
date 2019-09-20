@@ -23,9 +23,8 @@ pipeline {
       post {
         always {
           dir('java') {
-            //  junit "target\\surefire-reports\\*.xml"
-            //  archiveArtifacts "target\\surefire-reports\\*"
-             // archiveArtifacts "target\\cucumber-reports\\*"
+              junit "target\\surefire-reports\\testng-junit-results\\*.xml"
+              archiveArtifacts "target\\surefire-reports\\*\\*"
               archiveArtifacts "TestLogs\\*\\*"
               archiveArtifacts "allure-results\\*"
               allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
