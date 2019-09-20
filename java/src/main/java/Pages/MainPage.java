@@ -18,7 +18,7 @@ public class MainPage {
     @FindBy(linkText = enterStoreLink)
     private WebElement enterStore;
 
-    private static final String fishLinkCss = "img[src=\"../images/sm_fish.gif\"";
+    private static final String fishLinkCss = "img[src=\"../images/sm_fish.gif\"]";
     @FindBy(css = fishLinkCss)
     private WebElement fishLink;
 

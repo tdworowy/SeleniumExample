@@ -13,7 +13,8 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = { "pretty","html:target/cucumber-reports",
-                            "rerun:rerun/failed_scenarios.txt"})
-public class RunBddTests {
+@CucumberOptions(
+        features = {"@rerun/failed_scenarios.txt"},
+        plugin = { "pretty","html:target/cucumber-reports"})
+public class RunFailBddTests {
 }
