@@ -4,7 +4,6 @@ import Pages.MainPage;
 import Utils.TestLogger;
 import WebDriverPackage.WebDriverWrapper;
 import org.junit.jupiter.api.*;
-
 import java.net.MalformedURLException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
