@@ -74,6 +74,10 @@ public class ShopSteps {
     public void SearchForDog(String dogName)  throws Throwable {
         searchForAnimal(dogName);
     }
+    @When("^Pass$")
+    public void Pass()  throws Throwable {
+        int x; // Do nothing
+    }
     @Then("^Cat link Text is found '(.*?)'$")
     public void CatLinkTextIsFount(String linkText)  throws Throwable {
         Assert.assertTrue(mainPage.waitForProductLink(linkText));
@@ -85,6 +89,6 @@ public class ShopSteps {
     }
     @Then("^Fail$")
     public void Fail()  throws Throwable {
-        Assert.fail();
+        Assert.assertEquals(1,2);
     }
 }
