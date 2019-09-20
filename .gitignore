@@ -8,3 +8,4 @@ target
 TestLogs
 allure-results
 rerun
+.allure
