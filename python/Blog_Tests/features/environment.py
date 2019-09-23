@@ -1,7 +1,7 @@
 import time
 
 from Blog_Tests.Pages.base_page import set_up
-from Utils.utils import create_dir, MyLogging, take_screeanshot
+from Utils.utils import create_dir, MyLogging, take_screenshot
 
 BEHAVE_DEBUG = True
 logs_path = "logs"
@@ -40,7 +40,7 @@ def after_scenario(context, scenario):
 
 
 def after_step(context, step):
-    take_screeanshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\","%s" % step.name)
+    take_screenshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\","%s" % step.name)
     context.scenario_logging.log().info("Step status: " + str(step.status))
     if BEHAVE_DEBUG and str(step.status) == "Status.failed":
         import ipdb

@@ -2,14 +2,14 @@ import time
 
 from Shop_Tests.pages.main_page import MainPage
 from Shop_Tests.webdriver_wrapper.webdriver_wrapper import WebDriverWrapper
-from Utils.utils import create_dir, take_screeanshot, MyLogging
+from Utils.utils import create_dir, MyLogging, take_screenshot
 
 BEHAVE_DEBUG = True
 logs_path = "logs"
 
 
 def before_feature(context, feature):
-    create_dir(context, logs_path)
+    create_dir(logs_path)
 
     context.feature_logging = MyLogging()
     context.log_feature_file = logs_path + "\\%s_Log.log" % feature.name
@@ -24,7 +24,7 @@ def before_scenario(context, scenario):
     context.scenario_name = scenario.name.replace(" ", "_")
     context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
     context.logs_dir_name = logs_path + "\\" + context.scenario_name + "_" + context.time_stump
-    create_dir(context, context.logs_dir_name)
+    create_dir(context.logs_dir_name)
     context.log_file = context.logs_dir_name + "\\%s_Log_%s.log" % (context.scenario_name, context.time_stump)
     context.scenario_logging.add_log_file(context.log_file)
 
@@ -45,7 +45,7 @@ def after_scenario(context, scenario):
 
 
 def after_step(context, step):
-    take_screeanshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\","%s" % step.name)
+    take_screenshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\","%s" % step.name)
     context.scenario_logging.log().info("Step status: " + str(step.status))
     if BEHAVE_DEBUG and str(step.status) == "Status.failed":
         import ipdb
