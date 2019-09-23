@@ -8,10 +8,11 @@ BEHAVE_DEBUG = True
 
 logs_path = "logs"
 
+
 def before_feature(context, feature):
     context.mylogging = MyLogging()
     context.web_driver_wrapper = WebDriverWrapper(context)
-    context.main_page = MainPage(context, context.web_driver_wrapper,)
+    context.main_page = MainPage(context, context.web_driver_wrapper, )
 
     create_dir(logs_path)
     context.log_feature_file = logs_path + "\\%s_Log.log" % feature.name
