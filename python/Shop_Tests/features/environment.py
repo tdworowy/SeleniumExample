@@ -5,7 +5,6 @@ from Shop_Tests.webdriver_wrapper.webdriver_wrapper import WebDriverWrapper
 from Utils.utils import create_dir, take_screeanshot, MyLogging
 
 BEHAVE_DEBUG = True
-
 logs_path = "logs"
 
 
@@ -20,6 +19,7 @@ def before_feature(context, feature):
 
 def before_scenario(context, scenario):
     context.scenario_logging = MyLogging()
+
 
     context.scenario_name = scenario.name.replace(" ", "_")
     context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
@@ -56,7 +56,5 @@ def after_step(context, step):
 
 
 def after_feature(context, feature):
-
-    context.feature_logging.add_log_file(context.log_feature_file)
     context.feature_logging.log().info("Feature Finished: " + feature.name)
     context.feature_logging.log().info("Feature status: " + str(feature.status))
