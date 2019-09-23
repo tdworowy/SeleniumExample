@@ -11,10 +11,10 @@ logs_path = "logs"
 
 def before_feature(context, feature):
     context.mylogging = MyLogging()
-    context.web_driver_wrapper = WebDriverWrapper(context)
-    context.main_page = MainPage(context, context.web_driver_wrapper, )
+    web_driver_wrapper = WebDriverWrapper(context)
+    context.main_page = MainPage(context, web_driver_wrapper)
 
-    create_dir(logs_path)
+    create_dir(context, logs_path)
     context.log_feature_file = logs_path + "\\%s_Log.log" % feature.name
     context.mylogging.log(context.log_feature_file).info("Start Feature: " + feature.name)
 
@@ -22,7 +22,7 @@ def before_feature(context, feature):
 def before_scenario(context, scenario):
     context.scenario_name = scenario.name.replace(" ", "_")
     context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
-    context.screen_dir_name = logs_path + "\\" + context.scenario_name + "_" + context.time_stumpr_name
+    context.screen_dir_name = logs_path + "\\" + context.scenario_name + "_" + context.time_stump
     create_dir(context, context.screen_dir_name)
     context.log_file = context.screen_dir_name + "\\%s_Log_%s.log" % (context.scenario_name, context.time_stump)
     context.mylogging.log(context.log_file).info("Scenario started: " + scenario.name)
