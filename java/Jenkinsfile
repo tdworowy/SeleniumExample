@@ -26,8 +26,8 @@ pipeline {
         always {
           dir('java') {
               //archiveArtifacts "target\\surefire-reports\\*\\*"
-              archiveArtifacts "build\\reports\\tests\\test\\*\\*"
-              archiveArtifacts "TestLogs\\*\\*"
+              archiveArtifacts "build\\reports\\tests\\test\\**\\*"
+              archiveArtifacts "TestLogs\\**\\*"
               archiveArtifacts "allure-results\\*"
               allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
           }
