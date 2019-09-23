@@ -90,7 +90,7 @@ public class ShopSteps {
     }
     @Then("^SometimesFail")
     public void SometimesFail()  throws Throwable {
-        int randomInteger = new Random().nextInt(0);
+        int randomInteger = new Random().nextInt(2);
         Assert.assertEquals(randomInteger,1);
     }
 }
