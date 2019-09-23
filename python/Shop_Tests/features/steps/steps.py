@@ -21,7 +21,7 @@ def click_enter_store_link(context):
     context.main_page.click_enter_store_link()
 
 
-@given("Search for cat {cat_name}")
+@When("Search for cat {cat_name}")
 def search_for_cat(context, cat_name: str):
     search_for_product(context, cat_name)
 
