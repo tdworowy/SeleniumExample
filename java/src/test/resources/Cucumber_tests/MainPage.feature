@@ -14,7 +14,7 @@ Feature: Main Page Search
         Given Main page is opened
         And Entry store link is clicked
         When Search for dog '<name>'
-        Then Cat link Text is found '<link>'
+        Then Dog link Text is found '<link>'
 
         Examples:
             | name          | link         |

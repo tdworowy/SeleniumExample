@@ -1,50 +1,55 @@
 import time
 
-from Pages.base_page import tear_down
-
-from Blog_Tests.screens.screen_path import get_screen_path
-from Utils.utils import create_dir, take_screenshot, MyLogging
+from Blog_Tests.Pages.base_page import set_up
+from Utils.utils import create_dir, MyLogging, take_screeanshot
 
 BEHAVE_DEBUG = True
-
+logs_path = "logs"
 
 def before_feature(context, feature):
-    context.mylogging = MyLogging()
-    context.log_feature_file = get_screen_path() + "\\%s_Log.log" % feature.name
-    context.mylogging.log(context.log_feature_file).info("Start Feature: " + feature.name)
+    create_dir(context, logs_path)
+
+    context.feature_logging = MyLogging()
+    context.log_feature_file = logs_path + "\\%s_Log.log" % feature.name
+    context.feature_logging.add_log_file(context.log_feature_file)
+    context.feature_logging.log().info("Start Feature: " + feature.name)
 
 
 def before_scenario(context, scenario):
+    context.scenario_logging = MyLogging()
+
     context.scenario_name = scenario.name.replace(" ", "_")
     context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
-    context.screen_dir_name = get_screen_path() + "\\" + context.scenario_name + "_" + context.time_stumpr_name
-    create_dir(context, context.screen_dir_name)
-    context.log_file = context.screen_dir_name + "\\%s_Log_%s.log" % (context.scenario_name, context.time_stump)
-    context.mylogging.log(context.log_file).info("Scenario started: " + scenario.name)
+    context.logs_dir_name = logs_path + "\\" + context.scenario_name + "_" + context.time_stump
+    create_dir(context, context.logs_dir_name)
+    context.log_file = context.logs_dir_name + "\\%s_Log_%s.log" % (context.scenario_name, context.time_stump)
+    context.scenario_logging.add_log_file(context.log_file)
+
+    set_up(context,"TODO")
+    context.scenario_logging.log().info("Scenario started: " + scenario.name)
 
 
 def before_step(context, step):
-    context.mylogging.log(context.log_file).info("Step: " + step.name)
+    context.scenario_logging.log().info("Step: " + step.name)
 
 
 def after_scenario(context, scenario):
-    context.mylogging.log(context.log_file).info("Test Finished: " + context.scenario_name)
-    context.mylogging.log(context.log_file).info("Scenario status: " + str(scenario.status))
-    tear_down(context)
+    context.scenario_logging.log().info("Test Finished: " + context.scenario_name)
+    context.scenario_logging.log().info("Scenario status: " + str(scenario.status))
+    context.web_driver_wrapper.tear_down()
 
 
 def after_step(context, step):
-    take_screenshot(context, context.screen_dir_name + "\\", "%s_%s" % (context.scenario_name, step.name))
-    context.mylogging.log(context.log_file).info("Step status: " + str(step.status))
+    take_screeanshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\","%s" % step.name)
+    context.scenario_logging.log().info("Step status: " + str(step.status))
     if BEHAVE_DEBUG and str(step.status) == "Status.failed":
         import ipdb
-        context.mylogging.log(context.log_file).error("TEST FAIL")
-        context.mylogging.log(context.log_file).error(str(ipdb.post_mortem(step.exc_traceback)))
-        context.mylogging.log(context.log_file).error(context.get_log('browser'),)
-        context.mylogging.log(context.log_file).error(context.get_log('driver'))
+        context.scenario_logging.log().error("TEST FAIL")
+        context.scenario_logging.log().error(str(ipdb.post_mortem(step.exc_traceback)))
+        context.scenario_logging.log().error(context.get_log('browser'), )
+        context.scenario_logging.log().error(context.get_log('driver'))
 
 
 def after_feature(context, feature):
-    context.mylogging.log(context.log_feature_file)
-    context.mylogging.log(context.log_feature_file).info("Feature Finished: " + feature.name)
-    context.mylogging.log(context.log_feature_file).info("Feature status: " + str(feature.status))
+    context.feature_logging.log().info("Feature Finished: " + feature.name)
+    context.feature_logging.log().info("Feature status: " + str(feature.status))

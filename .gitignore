@@ -12,3 +12,4 @@ rerun
 build
 .gradle
 gradle
+logs

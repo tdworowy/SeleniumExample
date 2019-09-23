@@ -84,6 +84,11 @@ public class ShopSteps {
         Assert.assertTrue(mainPage.waitForProductLink(linkText));
         Assert.assertTrue(mainPage.checkIfProductTableIsDisplay());
     }
+    @Then("^Dof link Text is found '(.*?)'$")
+    public void DogLinkTextIsFount(String linkText)  throws Throwable {
+        Assert.assertTrue(mainPage.waitForProductLink(linkText));
+        Assert.assertTrue(mainPage.checkIfProductTableIsDisplay());
+    }
     @Then("^fish '(.*?)' is in the cart$")
     public void FishIsInCar(String itemId)  throws Throwable {
         Assert.assertTrue(cartPage.checkIfProductIsInCart(itemId));
