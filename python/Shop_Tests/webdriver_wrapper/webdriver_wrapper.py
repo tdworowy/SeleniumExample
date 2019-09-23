@@ -15,7 +15,6 @@ class WebDriverWrapper:
         self.context.driver.get(server)
         self.context.driver.implicitly_wait(1)
 
-
     def tear_down(self):
         self.context.driver.quit()
 

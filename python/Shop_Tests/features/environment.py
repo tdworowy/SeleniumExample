@@ -1,13 +1,18 @@
 import time
+
+from Shop_Tests.pages.main_page import MainPage
+from Shop_Tests.webdriver_wrapper.webdriver_wrapper import WebDriverWrapper
 from Utils.utils import create_dir, take_screenshot, MyLogging
 
 BEHAVE_DEBUG = True
 
 logs_path = "logs"
 
-
 def before_feature(context, feature):
     context.mylogging = MyLogging()
+    context.web_driver_wrapper = WebDriverWrapper(context)
+    context.main_page = MainPage(context, context.web_driver_wrapper,)
+
     create_dir(logs_path)
     context.log_feature_file = logs_path + "\\%s_Log.log" % feature.name
     context.mylogging.log(context.log_feature_file).info("Start Feature: " + feature.name)
