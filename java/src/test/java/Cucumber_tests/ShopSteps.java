@@ -13,6 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import java.net.MalformedURLException;
+import java.util.Random;
 
 public class ShopSteps {
 
@@ -87,8 +88,9 @@ public class ShopSteps {
     public void FishIsInCar(String itemId)  throws Throwable {
         Assert.assertTrue(cartPage.checkIfProductIsInCart(itemId));
     }
-    @Then("^Fail$")
-    public void Fail()  throws Throwable {
-        Assert.assertEquals(1,2);
+    @Then("^SometimesFail")
+    public void SometimesFail()  throws Throwable {
+        int randomInteger = new Random().nextInt(0);
+        Assert.assertEquals(randomInteger,1);
     }
 }

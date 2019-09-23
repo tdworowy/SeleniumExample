@@ -1,5 +1,5 @@
 Feature: Fail
-    Scenario:  Always fail
+    Scenario: Sometimes fail
         Given Main page is opened
         When Pass
-        Then Fail
+        Then SometimesFail
