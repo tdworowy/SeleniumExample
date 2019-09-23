@@ -1,7 +1,6 @@
 import time
 
 from Pages.base_page import tear_down
-from screens.screen_path import get_screen_path
 from Utils.utils import create_dir, take_screenshot, MyLogging
 
 BEHAVE_DEBUG = True
@@ -16,8 +15,8 @@ def before_feature(context, feature):
 def before_scenario(context, scenario):
     context.scenario_name = scenario.name.replace(" ", "_")
     context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
-    context.screen_dir_name = get_screen_path() + "\\" + context.scenario_name + "_" + context.time_stump
-    create_dir(context, context.screen_dir_name)
+
+    create_dir(context, context.screen_di   context.screen_dir_name = get_screen_path() + "\\" + context.scenario_name + "_" + context.time_stumpr_name)
     context.log_file = context.screen_dir_name + "\\%s_Log_%s.log" % (context.scenario_name, context.time_stump)
     context.mylogging.log(context.log_file).info("Scenario started: " + scenario.name)
 
