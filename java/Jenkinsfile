@@ -15,7 +15,8 @@ pipeline {
         {
              steps{
                     dir('java') {
-                        bat 'mvn clean test'
+                        //bat 'mvn clean test'
+                        bat gradlew test
                     }
                 }
           }
@@ -23,7 +24,8 @@ pipeline {
       post {
         always {
           dir('java') {
-              archiveArtifacts "target\\surefire-reports\\*\\*"
+              //archiveArtifacts "target\\surefire-reports\\*\\*"
+              archiveArtifacts "C:\\Users\\tdworowy\\Documents\\Selenium_traning\\Selenium_testing\\java\\build\\reports\\tests\\test\\*\\*"
               archiveArtifacts "TestLogs\\*\\*"
               archiveArtifacts "allure-results\\*"
               allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Fail" tests="2" skipped="0" failures="2" errors="0" timestamp="2019-09-23T06:13:35" hostname="B6FC6S2" time="21.857">
+  <properties/>
+  <testcase name="Always fail" classname="Fail" time="2.905">
+    <failure message="java.lang.AssertionError: expected [2] but found [1]" type="java.lang.AssertionError">java.lang.AssertionError: expected [2] but found [1]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:137)
+	at org.testng.Assert.assertEquals(Assert.java:118)
+	at org.testng.Assert.assertEquals(Assert.java:652)
+	at org.testng.Assert.assertEquals(Assert.java:662)
+	at Cucumber_tests.ShopSteps.Fail(ShopSteps.java:92)
+	at ✽.Fail(classpath:Cucumber_tests/Fail.feature:5)
+</failure>
+  </testcase>
+  <testcase name="Always fail" classname="Fail" time="2.895">
+    <failure message="java.lang.AssertionError: expected [2] but found [1]" type="java.lang.AssertionError">java.lang.AssertionError: expected [2] but found [1]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:137)
+	at org.testng.Assert.assertEquals(Assert.java:118)
+	at org.testng.Assert.assertEquals(Assert.java:652)
+	at org.testng.Assert.assertEquals(Assert.java:662)
+	at Cucumber_tests.ShopSteps.Fail(ShopSteps.java:92)
+	at ✽.Fail(classpath:Cucumber_tests/Fail.feature:5)
+</failure>
+  </testcase>
+  <system-out><![CDATA[
+Feature: Fail
+
+  Scenario: Always fail       ?[90m# Cucumber_tests/Fail.feature:2?[0m
+    ?[32mGiven ?[0m?[32mMain page is opened?[0m ?[90m# ShopSteps.OpenMainPage()?[0m
+    ?[32mWhen ?[0m?[32mPass?[0m                 ?[90m# ShopSteps.Pass()?[0m
+    ?[31mThen ?[0m?[31mFail?[0m                 ?[90m# ShopSteps.Fail()?[0m
+      ?[31mjava.lang.AssertionError: expected [2] but found [1]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:137)
+	at org.testng.Assert.assertEquals(Assert.java:118)
+	at org.testng.Assert.assertEquals(Assert.java:652)
+	at org.testng.Assert.assertEquals(Assert.java:662)
+	at Cucumber_tests.ShopSteps.Fail(ShopSteps.java:92)
+	at ?.Fail(classpath:Cucumber_tests/Fail.feature:5)
+?[0m
+Feature: Fail
+
+  Scenario: Always fail       ?[90m# Cucumber_tests/Fail.feature:2?[0m
+    ?[32mGiven ?[0m?[32mMain page is opened?[0m ?[90m# ShopSteps.OpenMainPage()?[0m
+    ?[32mWhen ?[0m?[32mPass?[0m                 ?[90m# ShopSteps.Pass()?[0m
+    ?[31mThen ?[0m?[31mFail?[0m                 ?[90m# ShopSteps.Fail()?[0m
+      ?[31mjava.lang.AssertionError: expected [2] but found [1]
+	at org.testng.Assert.fail(Assert.java:96)
+	at org.testng.Assert.failNotEquals(Assert.java:776)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:137)
+	at org.testng.Assert.assertEquals(Assert.java:118)
+	at org.testng.Assert.assertEquals(Assert.java:652)
+	at org.testng.Assert.assertEquals(Assert.java:662)
+	at Cucumber_tests.ShopSteps.Fail(ShopSteps.java:92)
+	at ?.Fail(classpath:Cucumber_tests/Fail.feature:5)
+?[0m
+]]></system-out>
+  <system-err><![CDATA[Starting ChromeDriver 77.0.3865.40 (f484704e052e0b556f8030b65b953dce96503217-refs/branch-heads/3865@{#442}) on port 11543
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+Sep 23, 2019 8:13:37 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Starting ChromeDriver 77.0.3865.40 (f484704e052e0b556f8030b65b953dce96503217-refs/branch-heads/3865@{#442}) on port 37903
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+Sep 23, 2019 8:13:56 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+]]></system-err>
+</testsuite>

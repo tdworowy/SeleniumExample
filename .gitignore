@@ -9,3 +9,6 @@ TestLogs
 allure-results
 rerun
 .allure
+build
+.gradle
+gradle

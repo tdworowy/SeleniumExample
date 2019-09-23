@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class Place order</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class Place order</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; Place order</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">12.398s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">Add fish to cart 'FI-FW-02'</td>
+<td class="success">5.517s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Add fish to cart 'FI-SW-01'</td>
+<td class="success">6.881s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>Feature: Place order
+
+  Scenario Outline: Add fish to cart '&lt;fishID&gt;' ?[90m# Cucumber_tests/Cart.feature:2?[0m
+    ?[36mGiven Main page is opened?[0m
+    ?[36mAnd Entry store link is clicked?[0m
+    ?[36mAnd user is log in 'j2ee' 'j2ee'?[0m
+    ?[36mAnd fish page is opened?[0m
+    ?[36mWhen Add '&lt;fishID&gt;' '&lt;itemID&gt;' to cart?[0m
+    ?[36mThen fish '&lt;itemID&gt;' is in the cart?[0m
+
+    Examples: 
+
+  Scenario Outline: Add fish to cart 'FI-SW-01' ?[90m# Cucumber_tests/Cart.feature:12?[0m
+    ?[32mGiven ?[0m?[32mMain page is opened?[0m                   ?[90m# ShopSteps.OpenMainPage()?[0m
+    ?[32mAnd ?[0m?[32mEntry store link is clicked?[0m             ?[90m# ShopSteps.EnterStoreLink()?[0m
+    ?[32mAnd ?[0m?[32muser is log in '?[0m?[32m?[1mj2ee?[0m?[32m' '?[0m?[32m?[1mj2ee?[0m?[32m'?[0m            ?[90m# ShopSteps.LogIn(String,String)?[0m
+    ?[32mAnd ?[0m?[32mfish page is opened?[0m                     ?[90m# ShopSteps.OpenFishPage()?[0m
+    ?[32mWhen ?[0m?[32mAdd '?[0m?[32m?[1mFI-SW-01?[0m?[32m' '?[0m?[32m?[1mEST-1?[0m?[32m' to cart?[0m         ?[90m# ShopSteps.AddFishToCart(String,String)?[0m
+    ?[32mThen ?[0m?[32mfish '?[0m?[32m?[1mEST-1?[0m?[32m' is in the cart?[0m            ?[90m# ShopSteps.FishIsInCar(String)?[0m
+
+  Scenario Outline: Add fish to cart 'FI-FW-02' ?[90m# Cucumber_tests/Cart.feature:13?[0m
+    ?[32mGiven ?[0m?[32mMain page is opened?[0m                   ?[90m# ShopSteps.OpenMainPage()?[0m
+    ?[32mAnd ?[0m?[32mEntry store link is clicked?[0m             ?[90m# ShopSteps.EnterStoreLink()?[0m
+    ?[32mAnd ?[0m?[32muser is log in '?[0m?[32m?[1mj2ee?[0m?[32m' '?[0m?[32m?[1mj2ee?[0m?[32m'?[0m            ?[90m# ShopSteps.LogIn(String,String)?[0m
+    ?[32mAnd ?[0m?[32mfish page is opened?[0m                     ?[90m# ShopSteps.OpenFishPage()?[0m
+    ?[32mWhen ?[0m?[32mAdd '?[0m?[32m?[1mFI-FW-02?[0m?[32m' '?[0m?[32m?[1mEST-20?[0m?[32m' to cart?[0m        ?[90m# ShopSteps.AddFishToCart(String,String)?[0m
+    ?[32mThen ?[0m?[32mfish '?[0m?[32m?[1mEST-20?[0m?[32m' is in the cart?[0m           ?[90m# ShopSteps.FishIsInCar(String)?[0m
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>Starting ChromeDriver 77.0.3865.40 (f484704e052e0b556f8030b65b953dce96503217-refs/branch-heads/3865@{#442}) on port 48969
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+Sep 23, 2019 8:13:25 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Starting ChromeDriver 77.0.3865.40 (f484704e052e0b556f8030b65b953dce96503217-refs/branch-heads/3865@{#442}) on port 35284
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+Sep 23, 2019 8:13:32 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 5.6.2</a> at 23 Sep 2019, 08:13:57</p>
+</div>
+</div>
+</body>
+</html>
