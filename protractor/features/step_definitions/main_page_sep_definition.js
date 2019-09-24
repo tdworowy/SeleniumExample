@@ -23,10 +23,22 @@ cucumber_1.Given(/^Main page is opened$/, function (callback) {
     protractor_1.browser.driver.get(protractor_1.browser.params.baseURL).then(callback);
 });
 cucumber_1.Given(/^Entry store link is clicked$/, function () {
-    protractor_1.browser.wait(protractor_1.ExpectedConditions.visibilityOf(protractor_1.element(protractor_1.by.css("a[href=\"actions/Catalog.action\"")))).then(function () {
-        protractor_1.browser.driver.findElement(protractor_1.element(protractor_1.by.css("a[href=\"actions/Catalog.action\""))).click();
-        protractor_1.browser.sleep(500);
-    });
+    //element(by.linkText("Enter the Store")).click() //Don't work, but should
+    // browser.wait(ExpectedConditions.visibilityOf( element(by.css("a[href=\"actions/Catalog.action\"")))).then(()=>{
+    //   browser.driver.findElement( element(by.css("a[href=\"actions/Catalog.action\""))).click();
+    //   browser.sleep(500);
+    // }) // Still don't work
+    // browser.wait(ExpectedConditions.visibilityOf(element(by.linkText("Enter the Store")))).then(()=>{
+    //   browser.driver.findElement( element(by.linkText("Enter the Store"))).click();
+    //   browser.sleep(500);
+    // }) // Don't work, protractor is fucking garbage
+    // browser.wait(ExpectedConditions.visibilityOf(element(by.xpath("#Content > p:nth-child(2) > a")))).then(()=>{
+    //   browser.driver.findElement( element(by.xpath("#Content > p:nth-child(2) > a"))).click();
+    //   browser.sleep(5000);
+    // }) // Nope
+    var enter_store = protractor_1.element(protractor_1.by.css("a[href=\"actions/Catalog.action\""));
+    protractor_1.browser.wait(protractor_1.ExpectedConditions.elementToBeClickable(enter_store), 5000);
+    protractor_1.browser.actions().mouseMove(enter_store).click().perform();
 });
 cucumber_1.When(/^Search for cat '([^\"]*)'$/, function (cat_name) {
     searchForProduct(cat_name);
