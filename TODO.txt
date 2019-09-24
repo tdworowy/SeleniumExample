@@ -1,3 +1,4 @@
-nightwatchjs
-selenium in erlang
 robot-framework
+nightwatchjs
+selenium in Haskell (?)
+selenium in R
