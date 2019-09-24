@@ -1,6 +1,5 @@
-import { Given, Then, When} from 'cucumber';
+import { Given, Then, When, After, AfterAll, BeforeAll} from 'cucumber';
 import {browser, element,by,ExpectedConditions} from 'protractor'
-import {config} from '../../protractor.conf.js'
 import { assert } from 'chai';
 
 function searchForProduct(productName:string):void {
@@ -19,24 +18,27 @@ function isProductLinkDisplayed(productLink:string):boolean {
     }
     
 }
-module.exports = function() {
-
-    Given(/^Main page is opened$/, ()=> {
-        browser.get(config.baseURL)
+BeforeAll(() => {
+  browser.ignoreSynchronization = true;
+})
+Given(/^Main page is opened$/, ()=> {
+        browser.get(browser.params.baseURL)
       });
-    Given(/^Entry store link is clicked$/, ()=> {
+Given(/^Entry store link is clicked$/, ()=> {
         element(by.linkText("Enter the Store")).click
       });
-    When(/^Search for cat "([^"]*)"$/, (cat_name:string)=> {
+When(/^Search for cat '([^\"]*)'$/, (cat_name:string)=> {
         searchForProduct(cat_name)
       });
-    When(/^Search for dog "([^"]*)"$/, (dog_name:string)=> {
+When(/^Search for dog '([^\"]*)'$/, (dog_name:string)=> {
         searchForProduct(dog_name)
       });
-    Then(/^Cat link Text is found "([^"]*)"$/, (cat_link:string)=> {
+Then(/^Cat link Text is found '([^\"]*)'$/, (cat_link:string)=> {
         assert.isTrue(isProductLinkDisplayed(cat_link))
       });
-    Then(/^Dog link Text is found "([^"]*)"$/, (dog_link:string)=> {
+Then(/^Dog link Text is found '([^\"]*)'$/, (dog_link:string)=> {
         assert.isTrue(isProductLinkDisplayed(dog_link))
       });
-}
+AfterAll(() => {
+       browser.driver.quit()
+    });

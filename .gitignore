@@ -14,3 +14,5 @@ build
 gradle
 logs
 node_modules
+results.json
+cucumber_reporter.html

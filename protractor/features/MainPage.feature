@@ -10,7 +10,7 @@ Feature: Main Page Search with Protractor
             | Persian       | FL-DLH-02     |
             | Manx          | FL-DSH-01     |
 
-    Scenario Outline: Search for dog '<name>'
+    Scenario Outline: Search for dog '<name>' with Protractor
         Given Main page is opened
         And Entry store link is clicked
         When Search for dog '<name>'
