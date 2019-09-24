@@ -9,6 +9,7 @@ Feature: Main Page Search with Protractor
             | name          | link          |
             | Persian       | FL-DLH-02     |
             | Manx          | FL-DSH-01     |
+            | incorrect1    | incorrect1     |
 
     Scenario Outline: Search for dog '<name>' with Protractor
         Given Main page is opened
