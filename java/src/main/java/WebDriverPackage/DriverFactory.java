@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class DriverFactory {
     private static String url = "http://192.168.0.104:4444/wd/hub";
-    private static  String ChromeDriverPath = "chromedriver/chromedriver.exe";
+    private static  String ChromeDriverPath = "../../../../../chromedriver/chromedriver.exe";
     public static WebDriver getDriver(DriversEnum driver) throws MalformedURLException {
         System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
         if (driver.equals(DriversEnum.ChromeRemote)) {

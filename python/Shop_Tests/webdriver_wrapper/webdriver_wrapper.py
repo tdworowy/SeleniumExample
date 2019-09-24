@@ -2,12 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
-from Chrome_Driver_Folder.driver_path import get_driver_path
-
 
 class WebDriverWrapper:
     def __init__(self):
-        chrome_driver_path = get_driver_path() + '\\chromedriver.exe'
+        chrome_driver_path = '..\\..\\chromedriver\\chromedriver.exe'
         self.driver = webdriver.Chrome(chrome_driver_path)
 
     def open_page(self, server: str):

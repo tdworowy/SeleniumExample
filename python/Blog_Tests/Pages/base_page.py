@@ -2,11 +2,9 @@ from Pages.admin_page import AdminPage
 from Pages.blog_page import BlogPage
 from Pages.login_page import LoginPage
 from selenium import webdriver
-from Chrome_Driver_Folder.driver_path import get_driver_path
-
 
 def set_up(context, server):
-    chrome_driver_path = get_driver_path() + '\\chromedriver.exe'
+    chrome_driver_path = '..\\..\\chromedriver\\chromedriver.exe'
     context.driver = webdriver.Chrome(chrome_driver_path)
     context.driver.get(server)
     context.driver.implicitly_wait(1)
