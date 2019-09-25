@@ -1,0 +1,5 @@
+allure-behave
+allure-python-commons
+behave
+robotframework
+selenium
