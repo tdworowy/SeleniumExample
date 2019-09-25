@@ -15,4 +15,5 @@ gradle
 logs
 node_modules
 results.json
-*html
+*.html
+output.xml
