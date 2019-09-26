@@ -1,4 +1,0 @@
-robot-framework
-nightwatchjs
-selenium in Haskell (?)
-selenium in R
