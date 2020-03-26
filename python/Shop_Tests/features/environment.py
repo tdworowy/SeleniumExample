@@ -20,7 +20,6 @@ def before_feature(context, feature):
 def before_scenario(context, scenario):
     context.scenario_logging = MyLogging()
 
-
     context.scenario_name = scenario.name.replace(" ", "_")
     context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
     context.logs_dir_name = logs_path + "\\" + context.scenario_name + "_" + context.time_stump
@@ -45,7 +44,7 @@ def after_scenario(context, scenario):
 
 
 def after_step(context, step):
-    take_screenshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\","%s" % step.name)
+    take_screenshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\", "%s" % step.name)
     context.scenario_logging.log().info("Step status: " + str(step.status))
     if BEHAVE_DEBUG and str(step.status) == "Status.failed":
         import ipdb
