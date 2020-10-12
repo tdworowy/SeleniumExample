@@ -21,7 +21,7 @@ def before_scenario(context, scenario):
     context.scenario_logging = MyLogging()
 
     context.scenario_name = scenario.name.replace(" ", "_")
-    context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
+     context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
     context.logs_dir_name = logs_path + "\\" + context.scenario_name + "_" + context.time_stump
     create_dir(context.logs_dir_name)
     context.log_file = context.logs_dir_name + "\\%s_Log_%s.log" % (context.scenario_name, context.time_stump)
