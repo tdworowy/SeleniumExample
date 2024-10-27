@@ -19,19 +19,19 @@ class MainPage:
 
     def click_enter_store_link(self):
         self.logging.log().info("Click enter store link")
-        self.web_driver_wrapper.driver.find_element(*MainPage.enter_store_link) \
-            .click()
+        self.web_driver_wrapper.driver.find_element(*MainPage.enter_store_link).click()
         return self
 
     def click_search_button(self):
         self.logging.log().info("Click search button")
-        self.web_driver_wrapper.driver.find_element(*MainPage.search_button) \
-            .click()
+        self.web_driver_wrapper.driver.find_element(*MainPage.search_button).click()
         return self
 
     def enter_search_text(self, text: str):
         self.logging.log().info("Enter text: %s" % text)
-        search_field = self.web_driver_wrapper.driver.find_element(*MainPage.search_field)
+        search_field = self.web_driver_wrapper.driver.find_element(
+            *MainPage.search_field
+        )
         search_field.clear()
         search_field.send_keys(text)
 

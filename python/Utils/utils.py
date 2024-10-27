@@ -15,12 +15,17 @@ class MyLogging:
     def add_log_file(self, path):
         self.log_file = path
         for logger in self.loggers:
-            if self.log_file in [handler.baseFilename for handler in logger.handlers if
-                                 hasattr(handler, 'baseFilename')]:
+            if self.log_file in [
+                handler.baseFilename
+                for handler in logger.handlers
+                if hasattr(handler, "baseFilename")
+            ]:
                 self.logger = logger
         else:
             file_handler = logging.FileHandler(self.log_file)
-            file_handler.setFormatter(logging.Formatter("%(levelname)s|%(asctime)s|%(message)s"))
+            file_handler.setFormatter(
+                logging.Formatter("%(levelname)s|%(asctime)s|%(message)s")
+            )
             file_handler.setLevel(logging.DEBUG)
 
             new_logger = logging.getLogger("Logger%s" % get_millis())
@@ -31,7 +36,8 @@ class MyLogging:
             self.logger = new_logger
 
     def clear_loggers(self):
-        while self.loggers: self.loggers.pop()
+        while self.loggers:
+            self.loggers.pop()
 
     def log(self):
         return self.logger
@@ -43,7 +49,7 @@ def create_dir(name):
 
 
 def take_screenshot(driver, path, file):
-    driver.save_screenshot(os.path.join(path, file.replace(' ', '_') + '.png'))
+    driver.save_screenshot(os.path.join(path, file.replace(" ", "_") + ".png"))
 
 
 def get_millis():

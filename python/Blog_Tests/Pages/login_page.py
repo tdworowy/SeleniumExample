@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 class LoginPage:
     def initialize_elements(self):
-        self.login_input = (By.NAME, 'username')
+        self.login_input = (By.NAME, "username")
         self.password_input = (By.NAME, "password")
         self.logIn_button = (By.CSS_SELECTOR, "input[type='submit']")
 

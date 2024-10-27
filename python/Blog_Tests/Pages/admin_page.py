@@ -4,14 +4,17 @@ from selenium.webdriver.support.select import Select
 
 class AdminPage:
     def initialize_elements(self):
-        self.site_name = (By.LINK_TEXT, 'Django administration')
-        self.add_post_button = (By.CSS_SELECTOR, "tr[class='model-post'] a[class='addlink']")
-        self.title_imput = (By.NAME, 'title')
-        self.body_text_area = (By.NAME, 'body')
-        self.tags_imput = (By.NAME, 'tags')
-        self.author_imput = (By.NAME, 'author')
-        self.save_post_button = (By.NAME, '_save')
-        self.status_select = (By.ID, 'id_status')
+        self.site_name = (By.LINK_TEXT, "Django administration")
+        self.add_post_button = (
+            By.CSS_SELECTOR,
+            "tr[class='model-post'] a[class='addlink']",
+        )
+        self.title_imput = (By.NAME, "title")
+        self.body_text_area = (By.NAME, "body")
+        self.tags_imput = (By.NAME, "tags")
+        self.author_imput = (By.NAME, "author")
+        self.save_post_button = (By.NAME, "_save")
+        self.status_select = (By.ID, "id_status")
 
         self.now = (By.LINK_TEXT, "Now")
 
@@ -41,7 +44,7 @@ class AdminPage:
         tags.send_keys(POST_obj.tags)
         if POST_obj.publish:
             select = Select(status_select)
-            select.select_by_value('published')
+            select.select_by_value("published")
 
         self.driver.find_element(*self.now).click()
         self.driver.find_element(*self.save_post_button).click()

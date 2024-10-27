@@ -9,5 +9,5 @@ def generate_report():
     os.system(commend)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     generate_report()

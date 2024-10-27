@@ -2,9 +2,7 @@ from behave import given, When, Then
 
 
 def search_for_product(context, name: str):
-    context.main_page \
-        .enter_search_text(name) \
-        .click_search_button()
+    context.main_page.enter_search_text(name).click_search_button()
 
 
 def check_link(context, link: str):

@@ -11,9 +11,7 @@ class MainPageSteps:
         self.main_page = MainPage(web_driver_wrapper)
 
     def search_for_product(self, name: str):
-        self.main_page \
-            .enter_search_text(name) \
-            .click_search_button()
+        self.main_page.enter_search_text(name).click_search_button()
 
     def check_link(self, link: str):
         assert self.main_page.check_if_link_is_displayed(link)

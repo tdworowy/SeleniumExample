@@ -6,6 +6,7 @@ from Utils.utils import create_dir, MyLogging, take_screenshot
 BEHAVE_DEBUG = True
 logs_path = "logs"
 
+
 def before_feature(context, feature):
     create_dir(context, logs_path)
 
@@ -19,13 +20,18 @@ def before_scenario(context, scenario):
     context.scenario_logging = MyLogging()
 
     context.scenario_name = scenario.name.replace(" ", "_")
-    context.time_stump = str(time.strftime('%Y-%m-%d_%H_%M_%S'))
-    context.logs_dir_name = logs_path + "\\" + context.scenario_name + "_" + context.time_stump
+    context.time_stump = str(time.strftime("%Y-%m-%d_%H_%M_%S"))
+    context.logs_dir_name = (
+        logs_path + "\\" + context.scenario_name + "_" + context.time_stump
+    )
     create_dir(context, context.logs_dir_name)
-    context.log_file = context.logs_dir_name + "\\%s_Log_%s.log" % (context.scenario_name, context.time_stump)
+    context.log_file = context.logs_dir_name + "\\%s_Log_%s.log" % (
+        context.scenario_name,
+        context.time_stump,
+    )
     context.scenario_logging.add_log_file(context.log_file)
 
-    set_up(context,"TODO")
+    set_up(context, "TODO")
     context.scenario_logging.log().info("Scenario started: " + scenario.name)
 
 
@@ -40,14 +46,21 @@ def after_scenario(context, scenario):
 
 
 def after_step(context, step):
-    take_screenshot(context.web_driver_wrapper.driver, context.logs_dir_name + "\\","%s" % step.name)
+    take_screenshot(
+        context.web_driver_wrapper.driver,
+        context.logs_dir_name + "\\",
+        "%s" % step.name,
+    )
     context.scenario_logging.log().info("Step status: " + str(step.status))
     if BEHAVE_DEBUG and str(step.status) == "Status.failed":
         import ipdb
+
         context.scenario_logging.log().error("TEST FAIL")
         context.scenario_logging.log().error(str(ipdb.post_mortem(step.exc_traceback)))
-        context.scenario_logging.log().error(context.get_log('browser'), )
-        context.scenario_logging.log().error(context.get_log('driver'))
+        context.scenario_logging.log().error(
+            context.get_log("browser"),
+        )
+        context.scenario_logging.log().error(context.get_log("driver"))
 
 
 def after_feature(context, feature):

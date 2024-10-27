@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions
 
 class WebDriverWrapper:
     def __init__(self):
-        chrome_driver_path = '..\\..\\chromedriver\\chromedriver.exe'
+        chrome_driver_path = "..\\..\\chromedriver\\chromedriver.exe"
         self.driver = webdriver.Chrome(chrome_driver_path)
 
     def open_page(self, server: str):
@@ -17,4 +17,6 @@ class WebDriverWrapper:
 
     def wait_for_element(self, locator, element: str):
         wait = WebDriverWait(self.driver, 10)
-        wait.until(expected_conditions.visibility_of_element_located((locator, element)))
+        wait.until(
+            expected_conditions.visibility_of_element_located((locator, element))
+        )
